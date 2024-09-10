@@ -25,7 +25,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 //lets get the context, or all the data
-import { GameProvider } from './src/contexts/GameContext';
+import { GameProvider } from './src/context/GameContext';
 //now the screens wrapped by the context and navigation
 //app opens with splash screen
 import SplashScreen from './src/screens/SplashScreen';
