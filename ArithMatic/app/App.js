@@ -47,20 +47,47 @@ const Stack = createStackNavigator();
 
 //create the app
 export default function App() {
-    return (
-        //wrap the app in the provider
-        <GameProvider>
-            <NavigationContainer>
-                <Stack.Navigator initialRouteName="Splash">
-                    <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
-                    <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-                    <Stack.Screen name="Game" component={GameScreen} options={{ headerShown: false }} />
-                    <Stack.Screen name="Options" component={OptionsScreen} options={{ headerShown: false }} />
-                    <Stack.Screen name="Results" component={ResultsScreen} options={{ headerShown: false }} />
-                    <Stack.Screen name="Stats" component={StatsScreen} options={{ headerShown: false }} />
-                    <Stack.Screen name="About" component={AboutScreen} options={{ headerShown: false }} />
-                </Stack.Navigator>
-            </NavigationContainer>
-        </GameProvider>
-    );
+  return (
+    <GameProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Splash">
+          <Stack.Screen 
+            name="Splash" 
+            component={SplashScreen} 
+            options={{ headerShown: false }} 
+          />
+          <Stack.Screen 
+            name="Home" 
+            component={HomeScreen} 
+            options={{ headerShown: false }} 
+          />
+          <Stack.Screen 
+            name="Game" 
+            component={GameScreen} 
+            options={{ headerShown: false }} 
+          />
+          <Stack.Screen 
+            name="Options" 
+            component={OptionsScreen} 
+            options={{ headerShown: false }} 
+          />
+          <Stack.Screen 
+            name="Results" 
+            component={ResultsScreen} 
+            options={{ headerShown: false }} 
+          />
+          <Stack.Screen 
+            name="Stats" 
+            component={StatsScreen} 
+            options={{ headerShown: false }} 
+          />
+          <Stack.Screen 
+            name="About" 
+            component={AboutScreen} 
+            options={{ headerShown: false }} 
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GameProvider>
+  );
 }
