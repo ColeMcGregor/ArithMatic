@@ -42,5 +42,10 @@ export const GameProvider = ({ children }) => {
                 newStats.breakdown[type].incorrect += 1;
             }
             setPlayerStats(newStats);
-        }
+        };
+        return (
+            <GameContext.Provider value={{ gameSettings, setGameSettings, playerStats, updateStats }}>
+                {children}
+            </GameContext.Provider>
+        );
     };

@@ -1,38 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { View, Image, Text, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Image, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+//splash screen image
+import splashImage from '../assets/images/SplashScreenAIIteration1.jpg';
+
+/**
+ * Splash Screen
+ * contains the image of our(my) company "Hooting Monkeys Studio"
+ * and displays it for 4 seconds before moving to the Home Screen
+ * 
+ * @returns SplashScreen
+ */
 
 export default function SplashScreen() {
-  const [imageStatus, setImageStatus] = useState('loading');
   const navigation = useNavigation();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.replace('Home');
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home' }], // Resets the stack and puts home screen on top, no return until app reload
+      });
     }, 4000);  // 4-second delay before moving to HomeScreen
 
-    return () => clearTimeout(timer);
-  }, [navigation]);
-
-  const handleImageLoad = () => {
-    setImageStatus('loaded');
-  };
-
-  const handleImageError = () => {
-    setImageStatus('error');
-  };
+    return () => clearTimeout(timer);  // Clear the timer after first run
+  }, []);
 
   return (
     <View style={styles.container}>
       <Image 
-        source={require('../assets/images/SplashScreenAIIteration1.jpg')}
+        source={splashImage}  // Use the imported image
         style={styles.image}
-        onLoad={handleImageLoad}
-        onError={handleImageError}
       />
-      {imageStatus === 'error' && (
-        <Text style={styles.errorText}>Image Failed to Load</Text>
-      )}
     </View>
   );
 }
@@ -42,16 +41,10 @@ const styles = StyleSheet.create({
     flex: 1, 
     justifyContent: 'center', 
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#4863A0',
   },
   image: { 
     width: '100%', 
-    height: '100%',
-    resizeMode: 'contain',
-  },
-  errorText: {
-    position: 'absolute',
-    fontSize: 18,
-    color: 'red',
+    height: '65%',
   },
 });
