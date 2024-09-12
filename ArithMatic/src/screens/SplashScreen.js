@@ -15,15 +15,33 @@ import splashImage from '../assets/images/SplashScreenAIIteration1.jpg';
 export default function SplashScreen() {
   const navigation = useNavigation();
 
+  /**
+   * We are gonna use a hook (useEffect) to load the font and then
+   * reset the navigation to the Home Screen after 4 seconds. 
+   * a promise is used to wait for the font to load before resetting the navigation.
+   * promise.all will wait for all the promises to resolve before resetting the navigation.
+   * the promise arguments both have to equal true before the navigation is reset, and
+   * when loadAsync and a timeout is used, the return value is true or false
+   */
   useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'Home' }], // Resets the stack and puts home screen on top, no return until app reload
+    //will make sure at least 4 seconds have passed before moving to the Home Screen
+    async function prepare() { 
+      //load the font
+      const fontPromise = Font.loadAsync({
+        'BubbleFont': require('../assets/fonts/BubbleFont.otf'),
       });
-    }, 4000);  // 4-second delay before moving to HomeScreen
-
-    return () => clearTimeout(timer);  // Clear the timer after first run
+      //create a promise that will resolve after 4 seconds
+      const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 4000));
+      //wait for both the font and the timeout to resolve before resetting the navigation
+      await Promise.all([fontPromise, timeoutPromise]);
+      //reset the navigation to the Home Screen, and take the splash off the stack
+      navigation.reset({
+        index: 0, //reset the stack to the first screen
+        routes: [{ name: 'Home' }], //reset the stack to the Home Screen
+      });
+    }
+    //call the prepare function
+    prepare();
   }, []);
 
   return (
