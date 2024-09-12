@@ -13,6 +13,7 @@ import splashImage from '../assets/images/SplashScreenAIIteration1.jpg';
  */
 
 export default function SplashScreen() {
+  
   const navigation = useNavigation();
 
   /**
@@ -59,7 +60,6 @@ const styles = StyleSheet.create({
     flex: 1, 
     justifyContent: 'center', 
     alignItems: 'center',
-    backgroundColor: '#4863A0',
   },
   image: { 
     width: '100%', 

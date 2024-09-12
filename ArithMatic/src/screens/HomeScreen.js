@@ -1,43 +1,34 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-
-import { TouchableOpacity } from 'react-native';
-import BouncyButton from '../components/bouncybutton';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import * as Font from 'expo-font';
+//context
 import { GameContext } from '../contexts/GameContext';
+//fonts
+import BubbleFont from '../assets/fonts/BubbleFont.otf';
+//decorations
+import HomeBackground from '../components/decorations/HomeBackground';
+import Title from '../components/decorations/Title';
+//buttons
+import GoButton from '../components/buttons/GoButton';
+import OptionsButton from '../components/buttons/OptionsButton';
+import ScoresButton from '../components/buttons/ScoresButton';
+import AboutButton from '../components/buttons/AboutButton';
+
 
 
 export default function HomeScreen() {
+  //stuff
+  const [fontsLoaded] = Font.useFonts({
+    BubbleFont: BubbleFont,
+  }); 
+  if (!fontsLoaded) {
+    console.log('fonts not loaded');  
+  }
+
+  //return
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Arith-Matic</Text>
-      <BouncyButton 
-      buttonText={'GO!'} 
-      targetScreen={'Game'}
-      textColor={'#fff'}
-      backgroundColor={'#0D0'}
-      fontSize={50}
-      />
-      <BouncyButton 
-      buttonText={'Options'} 
-      targetScreen={'Options'}
-      textColor={'#fff'}
-      backgroundColor={'#00D'}
-      fontSize={20}
-      />
-      <BouncyButton 
-      buttonText={'Scores'} 
-      targetScreen={'Stats'}
-      textColor={'#fff'}
-      backgroundColor={'#0DD'}
-      fontSize={20}
-      />
-      <BouncyButton 
-      buttonText={'About'} 
-      targetScreen={'About'}
-      textColor={'#fff'}
-      backgroundColor={'#DDD'}
-      fontSize={20}
-      />
     </View>
   );
 }
