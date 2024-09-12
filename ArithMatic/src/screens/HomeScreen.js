@@ -15,7 +15,6 @@ import ScoresButton from '../components/buttons/ScoresButton';
 import AboutButton from '../components/buttons/AboutButton';
 
 
-
 export default function HomeScreen() {
   //stuff
   const [fontsLoaded] = Font.useFonts({
