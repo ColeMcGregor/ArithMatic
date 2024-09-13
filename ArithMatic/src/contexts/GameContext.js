@@ -43,6 +43,16 @@ export const GameProvider = ({ children }) => {
             }
             setPlayerStats(newStats);
         };
+        
+        //aggreagte player stats
+
+        //aggregate player scores
+
+        //Aggregate all games together
+
+
+
+
         return (
             <GameContext.Provider value={{ gameSettings, setGameSettings, playerStats, updateStats }}>
                 {children}
