@@ -30,6 +30,7 @@ export const GameProvider = ({ children }) => {
         time: 30,
         questions: 5,
         significantFigures: 1,
+        complexity: 1, //for how many sets of parenthesized numbers sets to use(nested arithmetic)
         parentheses: false,
         decimal: false,
         mode: 'count',
