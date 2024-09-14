@@ -40,7 +40,7 @@ class ArithmeticCard {
    */
   generateQuestion(gameSettings) {
     //destructure the game settings(grab the settings)
-    const { selectTypes, significantFigures, parentheses, complexity, decimal } = gameSettings;
+    const { selectTypes, significantFigures, decimal } = gameSettings;
 
     // Select a random question type from the selected types, returns a string
     const questionType = selectTypes[Math.floor(Math.random() * selectTypes.length)];
@@ -56,28 +56,28 @@ class ArithmeticCard {
     */
     switch (questionType) {
       case 'addition':
-        this.createAdditionQuestion(significantFigures, parentheses, decimal);
+        this.createAdditionQuestion(significantFigures, decimal);
         break;
       case 'subtraction':
-        this.createSubtractionQuestion(significantFigures, parentheses, decimal);
+        this.createSubtractionQuestion(significantFigures, decimal);
         break;
       case 'multiplication':
-        this.createMultiplicationQuestion(significantFigures, parentheses, decimal);
+        this.createMultiplicationQuestion(significantFigures, decimal);
         break;
       case 'division':
-        this.createDivisionQuestion(significantFigures, parentheses, decimal);
+        this.createDivisionQuestion(significantFigures, decimal);
         break;
       case 'exponents':
-        this.createExponentsQuestion(significantFigures, parentheses, decimal);
+        this.createExponentsQuestion(significantFigures, decimal);
         break;
       case 'roots':
-        this.createRootsQuestion(significantFigures, parentheses, decimal);
+        this.createRootsQuestion(significantFigures, decimal);
         break;
       case 'logarithms':
-        this.createLogarithmsQuestion(significantFigures, parentheses, decimal);
+        this.createLogarithmsQuestion(significantFigures, decimal);
         break;
       case 'modulus':
-        this.createModulusQuestion(significantFigures, parentheses, decimal);
+        this.createModulusQuestion(significantFigures, decimal);
         break;
       default:
         break;
@@ -93,19 +93,143 @@ class ArithmeticCard {
    * @param {*} decimal passed to generateRandomNumber to set the number of decimals
    * 
    */
-  createAdditionQuestion(significantFigures, parentheses, decimal) {
-    // Example logic for creating an addition question
+  createAdditionQuestion(significantFigures, decimal) {
     const num1 = this.generateRandomNumber(significantFigures, decimal);
     const num2 = this.generateRandomNumber(significantFigures, decimal);
 
     // Create the question string with optional parentheses
     const question = `${num1} + ${num2}`;
-    this.question = parentheses ? `(${question})` : question;
     this.correctAnswer = num1 + num2;
 
     // Populate possible answers (simple example)
     this.possibleAnswers = this.generatePossibleAnswers(this.correctAnswer);
   }
+
+  /**
+   * createSubtractionQuestion is a function that creates a subtraction question
+   * it will be used in the generateQuestion function to create a subtraction question
+   * it will be used in the GameScreen to when a question is needed for a game, then stored    
+   * @param {*} significantFigures passed to generateRandomNumber to set the number of significant figures
+   * @param {*} decimal passed to generateRandomNumber to set the number of decimals
+   * @returns 
+   */
+  createSubtractionQuestion(significantFigures, decimal) {
+    const num1 = this.generateRandomNumber(significantFigures, decimal);
+    const num2 = this.generateRandomNumber(significantFigures, decimal);
+
+    // Create the question string with optional parentheses
+    const question = `${num1} - ${num2}`;
+    this.correctAnswer = num1 - num2;
+
+    // Populate possible answers (simple example)
+    this.possibleAnswers = this.generatePossibleAnswers(this.correctAnswer);
+  }
+
+  /**
+   * createMultiplicationQuestion is a function that creates a multiplication question
+   * it will be used in the generateQuestion function to create a multiplication question
+   * it will be used in the GameScreen to when a question is needed for a game, then stored    
+   * @param {*} significantFigures passed to generateRandomNumber to set the number of significant figures
+   * @param {*} decimal passed to generateRandomNumber to set the number of decimals
+   * @returns 
+   */
+  createMultiplicationQuestion(significantFigures, decimal) {
+    const num1 = this.generateRandomNumber(significantFigures, decimal);
+    const num2 = this.generateRandomNumber(significantFigures, decimal);
+
+    // Create the question string with optional parentheses
+    const question = `${num1} * ${num2}`;
+    this.correctAnswer = num1 * num2;
+  }
+
+
+  /**
+   * createDivisionQuestion is a function that creates a division question
+   * it will be used in the generateQuestion function to create a division question
+   * it will be used in the GameScreen to when a question is needed for a game, then stored    
+   * @param {*} significantFigures passed to generateRandomNumber to set the number of significant figures
+   * @param {*} decimal passed to generateRandomNumber to set the number of decimals
+   * @returns 
+   */
+  createDivisionQuestion(significantFigures, decimal) {
+    const num1 = this.generateRandomNumber(significantFigures, decimal);
+    const num2 = this.generateRandomNumber(significantFigures, decimal);
+
+    // Create the question string with optional parentheses
+    const question = `${num1} / ${num2}`;
+    this.correctAnswer = num1 / num2;
+  }
+
+  /**
+   * createExponentsQuestion is a function that creates an exponents question
+   * it will be used in the generateQuestion function to create an exponents question
+   * it will be used in the GameScreen to when a question is needed for a game, then stored    
+   * @param {*} significantFigures passed to generateRandomNumber to set the number of significant figures
+   * @param {*} decimal passed to generateRandomNumber to set the number of decimals
+   * @returns 
+   */
+  createExponentsQuestion(significantFigures, decimal) {
+    const base = this.generateRandomNumber(significantFigures, decimal);
+    const exponent = this.generateRandomNumber(significantFigures, decimal);
+
+    // Create the question string with optional parentheses
+    const question = `${base} ^ ${exponent}`;
+    this.correctAnswer = Math.pow(base, exponent);    
+  }
+
+  /**
+   * createRootsQuestion is a function that creates a roots question
+   * it will be used in the generateQuestion function to create a roots question
+   * it will be used in the GameScreen to when a question is needed for a game, then stored    
+   * @param {*} significantFigures passed to generateRandomNumber to set the number of significant figures
+   * @param {*} decimal passed to generateRandomNumber to set the number of decimals
+   * @returns 
+   */
+  createRootsQuestion(significantFigures, decimal) {
+    const radicand = this.generateRandomNumber(significantFigures, decimal);
+    const index = this.generateRandomNumber(significantFigures, decimal);
+
+    // Create the question string with optional parentheses
+    const question = `√(${radicand})`;
+    this.correctAnswer = Math.pow(radicand, 1 / index); // Calculate the root
+  }
+
+  /**
+   * createLogarithmsQuestion is a function that creates a logarithms question
+   * it will be used in the generateQuestion function to create a logarithms question
+   * it will be used in the GameScreen to when a question is needed for a game, then stored    
+   * @param {*} significantFigures passed to generateRandomNumber to set the number of significant figures
+   * @param {*} decimal passed to generateRandomNumber to set the number of decimals
+   * @returns 
+   */
+  createLogarithmsQuestion(significantFigures, decimal) {
+    const base = this.generateRandomNumber(significantFigures, decimal);
+    const argument = this.generateRandomNumber(significantFigures, decimal);
+
+    // Create the question string with optional parentheses
+    const question = `log(${argument})`;
+    this.correctAnswer = Math.log(argument) / Math.log(base); // Calculate the logarithm  
+  }
+
+  /**
+   * createModulusQuestion is a function that creates a modulus question
+   * it will be used in the generateQuestion function to create a modulus question
+   * it will be used in the GameScreen to when a question is needed for a game, then stored    
+   * @param {*} significantFigures passed to generateRandomNumber to set the number of significant figures
+   * @param {*} decimal passed to generateRandomNumber to set the number of decimals
+   * @returns 
+   */
+  createModulusQuestion(significantFigures, decimal) {
+    const number = this.generateRandomNumber(significantFigures, decimal);
+    const modulus = this.generateRandomNumber(significantFigures, decimal);
+
+    // Create the question string with optional parentheses
+    const question = `|${number}| mod ${modulus}`;
+    this.correctAnswer = number % modulus; // Calculate the modulus
+  }
+
+
+  
 
   generateRandomNumber(significantFigures, decimal) {
     // Logic to generate a number with given significant figures and decimal settings

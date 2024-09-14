@@ -16,34 +16,34 @@ import InfoButton from '../components/buttons/InfoButton';
 
 
 export default function HomeScreen() {
-  //stuff
-  const [fontsLoaded] = Font.useFonts({
-    PixieFont: PixieFont,
-  }); 
-  if (!fontsLoaded) {
-    console.log('fonts not loaded');  
-  }
+//stuff
+const [fontsLoaded] = Font.useFonts({
+  PixieFont: PixieFont,
+}); 
+if (!fontsLoaded) {
+  console.log('fonts not loaded');  
+}
 
-  //return
-  return (
-    <View style={styles.container}>
-      <HomeBackground />
-      <Text style={styles.title}>Arith-Matic</Text>
-      <GoButton />
-      <InfoButton />
-    </View>
-  );
+//return
+return (
+  <View style={styles.container}>
+    <HomeBackground />
+    <Text style={styles.title}>Arith-Matic</Text>
+    <GoButton />
+    <InfoButton />
+  </View>
+);
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#009900',
-  },
-  title: {
-    flex: .3,
-    fontSize: 50,
-    fontWeight: 'bold',
-  },
+container: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: '#009900',
+},
+title: {
+  flex: .3,
+  fontSize: 50,
+  fontWeight: 'bold',
+},
 });
