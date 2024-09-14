@@ -12,7 +12,7 @@ import Title from '../components/decorations/Title';
 import GoButton from '../components/buttons/GoButton';
 import OptionsButton from '../components/buttons/OptionsButton';
 import ScoresButton from '../components/buttons/ScoresButton';
-import AboutButton from '../components/buttons/AboutButton';
+import InfoButton from '../components/buttons/InfoButton';
 
 
 export default function HomeScreen() {
@@ -30,6 +30,7 @@ export default function HomeScreen() {
       <HomeBackground />
       <Text style={styles.title}>Arith-Matic</Text>
       <GoButton />
+      <InfoButton />
     </View>
   );
 }
