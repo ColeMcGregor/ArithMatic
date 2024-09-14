@@ -4,7 +4,7 @@ import * as Font from 'expo-font';
 //context
 import { GameContext } from '../contexts/GameContext';
 //fonts
-import BubbleFont from '../assets/fonts/BubbleFont.otf';
+import PixieFont from '../assets/fonts/PixieFont.otf';
 //decorations
 import HomeBackground from '../components/decorations/HomeBackground';
 import Title from '../components/decorations/Title';
@@ -18,7 +18,7 @@ import AboutButton from '../components/buttons/AboutButton';
 export default function HomeScreen() {
   //stuff
   const [fontsLoaded] = Font.useFonts({
-    BubbleFont: BubbleFont,
+    PixieFont: PixieFont,
   }); 
   if (!fontsLoaded) {
     console.log('fonts not loaded');  
@@ -27,7 +27,9 @@ export default function HomeScreen() {
   //return
   return (
     <View style={styles.container}>
+      <HomeBackground />
       <Text style={styles.title}>Arith-Matic</Text>
+      <GoButton />
     </View>
   );
 }
