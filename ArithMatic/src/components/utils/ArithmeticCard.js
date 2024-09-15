@@ -1,13 +1,13 @@
 import React from 'react';
 
 /**
- * ArithmeticCard is a class that represents a single arithmetic card
- * it will be used in the GameScreen to display a single card
- * it will store the question, possible answers, correct answer, and the time taken to answer
- * it will also store the startTime and endTime of the card
- * it will have a method to check if the answer is correct
- * it will have a method to convert the card to a JSON format for storage
- * it will have a static method to restore the card from a JSON format
+ * ArithmeticCard is a class that represents a single arithmetic card.
+ * It will be used in the GameScreen to display a single card.
+ * It will store the question, possible answers, correct answer, and the time taken to answer.
+ * It will also store the startTime and endTime of the card.
+ * It will have a method to check if the answer is correct.
+ * It will have a method to convert the card to a JSON format for storage.
+ * It will have a static method to restore the card from a JSON format.
  */
 
 class ArithmeticCard {
@@ -18,7 +18,7 @@ class ArithmeticCard {
   #startTimeValue = null;
   #endTimeValue = null;
   #timeTaken = null;
-  #type = ''; // New field to store the question type
+  #type = ''; // Stores the question type (e.g., 'addition', 'subtraction')
 
   /**
    * Constructor handles both fresh generation and loading from storage.
@@ -30,7 +30,7 @@ class ArithmeticCard {
    */
   constructor(question, possibleAnswers, correctAnswer, type = '', data = null) {
     if (data) {
-      // Restore from data (AsyncStorage or other sources)
+      // Restore from JSON data (AsyncStorage or other sources)
       this.#question = data.question;
       this.#possibleAnswers = data.possibleAnswers;
       this.#correctAnswer = data.correctAnswer;
@@ -45,30 +45,60 @@ class ArithmeticCard {
       this.#type = type;
     }
   }
-  //getters
-  // Getter for question type
+
+  // Getters for various fields
   getType() {
     return this.#type;
   }
+
   getQuestion() {
     return this.#question;
   }
+
   getPossibleAnswers() {
     return this.#possibleAnswers;
   }
+
   getCorrectAnswer() {
     return this.#correctAnswer;
   }
+
   getAnsweredCorrectly() {
     return this.#answeredCorrectly;
   }
+
   getTimeTaken() {
     return this.#timeTaken;
   }
-  
-  
 
-  // Convert to JSON-friendly format for AsyncStorage
+  // Method to start the timer
+  startTime() {
+    this.#startTimeValue = Date.now();
+  }
+
+  // Method to end the timer and calculate time taken
+  endTime() {
+    this.#endTimeValue = Date.now();
+    this.calculateTimeTaken();
+  }
+
+  // Calculate the time taken to answer
+  calculateTimeTaken() {
+    if (this.#startTimeValue && this.#endTimeValue) {
+      this.#timeTaken = (this.#endTimeValue - this.#startTimeValue) / 1000; // Time in seconds
+    }
+  }
+
+  /**
+   * Method to submit an answer and mark whether it was correct.
+   * @param {number} userAnswer - The answer provided by the player.
+   */
+  submitAnswer(userAnswer) {
+    this.#answeredCorrectly = userAnswer === this.#correctAnswer;
+    this.endTime(); // Stop the timer when the answer is submitted
+  }
+
+  // Convert the card to a JSON-friendly format for AsyncStorage or other storage
   toJSON() {
     return {
       question: this.#question,
@@ -76,11 +106,11 @@ class ArithmeticCard {
       correctAnswer: this.#correctAnswer,
       answeredCorrectly: this.#answeredCorrectly,
       timeTaken: this.#timeTaken,
-      type: this.#type, // Include type in JSON
+      type: this.#type, // Include the question type in the JSON
     };
   }
 
-  // Static method to restore from JSON
+  // Static method to restore the card from JSON
   static fromJSON(data) {
     return new ArithmeticCard(null, null, null, '', data);
   }
