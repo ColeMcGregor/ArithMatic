@@ -190,3 +190,11 @@ while (possibleAnswers.length < 4) {
 }
 return possibleAnswers.sort(() => Math.random() - 0.5);
 };
+
+
+/** for logic questions
+const andSymbol = '∧';
+const orSymbol = '∨';
+const notSymbol = '¬';
+const impliesSymbol = '→';
+ */

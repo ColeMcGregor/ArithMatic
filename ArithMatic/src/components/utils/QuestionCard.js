@@ -10,8 +10,9 @@ import React from 'react';
  * It will have a static method to restore the card from a JSON format.
  */
 
-class ArithmeticCard {
+class QuestionCard {
   #question;
+  #questionEnglish;
   #possibleAnswers;
   #correctAnswer;
   #answeredCorrectly = false;
@@ -23,15 +24,17 @@ class ArithmeticCard {
   /**
    * Constructor handles both fresh generation and loading from storage.
    * @param {string} question - The question text.
+   * @param {string} questionEnglish - The question text in English.
    * @param {array} possibleAnswers - An array of possible answers.
    * @param {number} correctAnswer - The correct answer.
    * @param {string} type - The type of arithmetic question (e.g., 'addition').
    * @param {object} data - Optional JSON data for restoring the card from storage.
    */
-  constructor(question, possibleAnswers, correctAnswer, type = '', data = null) {
+  constructor(question, questionEnglish, possibleAnswers, correctAnswer, type = '', data = null) {
     if (data) {
       // Restore from JSON data (AsyncStorage or other sources)
       this.#question = data.question;
+      this.#questionEnglish = data.questionEnglish;
       this.#possibleAnswers = data.possibleAnswers;
       this.#correctAnswer = data.correctAnswer;
       this.#answeredCorrectly = data.answeredCorrectly;
@@ -40,6 +43,7 @@ class ArithmeticCard {
     } else {
       // Fresh card creation
       this.#question = question;
+      this.#questionEnglish = questionEnglish;
       this.#possibleAnswers = possibleAnswers;
       this.#correctAnswer = correctAnswer;
       this.#type = type;
@@ -53,6 +57,10 @@ class ArithmeticCard {
 
   getQuestion() {
     return this.#question;
+  }
+
+  getQuestionEnglish() {
+    return this.#questionEnglish;
   }
 
   getPossibleAnswers() {
@@ -102,6 +110,7 @@ class ArithmeticCard {
   toJSON() {
     return {
       question: this.#question,
+      questionEnglish: this.#questionEnglish,
       possibleAnswers: this.#possibleAnswers,
       correctAnswer: this.#correctAnswer,
       answeredCorrectly: this.#answeredCorrectly,
@@ -112,8 +121,8 @@ class ArithmeticCard {
 
   // Static method to restore the card from JSON
   static fromJSON(data) {
-    return new ArithmeticCard(null, null, null, '', data);
+    return new QuestionCard(null, null, null, null, '', data);
   }
 }
 
-export default ArithmeticCard;
+export default QuestionCard;
