@@ -25,7 +25,7 @@
  import { NavigationContainer } from '@react-navigation/native';
  import { createStackNavigator } from '@react-navigation/stack';
  //lets get the context, or all the data
- import { GameProvider } from './src/contexts/GameContext';
+ import { ContextProvider } from './src/contexts/ContextProvider';
  //now the screens wrapped by the context and navigation
  //app opens with splash screen
  import SplashScreen from './src/screens/SplashScreen';
@@ -48,7 +48,7 @@
  //create the app
  export default function App() {
    return (
-     <GameProvider>
+     <ContextProvider>
        <NavigationContainer>
          <Stack.Navigator initialRouteName="Splash">
            <Stack.Screen 
@@ -88,6 +88,6 @@
            />
          </Stack.Navigator>
        </NavigationContainer>
-     </GameProvider>
+     </ContextProvider>
    );
  }

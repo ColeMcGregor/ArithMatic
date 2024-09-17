@@ -1,14 +1,14 @@
 import React from 'react';
-import ArithmeticCard from './ArithmeticCard';
+import QuestionCard from './QuestionCard';
 
 /**
- * Factory function to generate an array of ArithmeticCards based on game settings.
+ * Factory function to generate an array of QuestionCards based on game settings.
  * The number of cards depends on whether the mode is 'count' or 'time'.
  * 
  * @param {object} gameSettings - The settings for the game, including selected question types, significant figures, and mode.
- * @returns {Array<ArithmeticCard>} - An array of newly generated ArithmeticCards.
+ * @returns {Array<QuestionCard>} - An array of newly generated QuestionCards.
  */
-export const createArithmeticCards = (gameSettings) => {
+export const createQuestionCards = (gameSettings) => {
 const { mode, questions, time } = gameSettings;
 let numberOfCards;
 
@@ -26,19 +26,19 @@ if (mode === 'count') {
 // Generate the specified number of cards
 const cards = [];
 for (let i = 0; i < numberOfCards; i++) {
-    cards.push(createArithmeticCard(gameSettings));
+    cards.push(createQuestionCard(gameSettings));
 }
 
 return cards;
     };
 
 /**
- * Factory function to generate a fresh ArithmeticCard based on game settings.
+ * Factory function to generate a fresh QuestionCard based on game settings.
  * 
  * @param {object} gameSettings - The settings for the game, including selected question types, significant figures, and decimal options.
- * @returns {ArithmeticCard} - A newly generated ArithmeticCard.
+ * @returns {QuestionCard} - A newly generated QuestionCard.
  */
-const createArithmeticCard = (gameSettings) => {
+const createQuestionCard = (gameSettings) => {
 const { selectTypes, significantFigures, decimal } = gameSettings;
 
 // Randomly select a question type
@@ -75,22 +75,25 @@ switch (questionType) {
     case 'logarithm':
     [question, correctAnswer, possibleAnswers] = createLogarithmQuestion(significantFigures, decimal);
     break;
+    case 'logic':
+    [question, correctAnswer, possibleAnswers] = createLogicQuestion();
+    break;
     default:
     break;
 }
+//parse the question to english
+//const questionEnglish = parseQuestionToEnglish(question, significantFigures, decimal);
 
-// Return a new ArithmeticCard instance with the generated question data and its type
-return new ArithmeticCard(question, possibleAnswers, correctAnswer, questionType);
+// Return a new QuestionCard instance with the generated question data and its type
+return new QuestionCard(question, questionEnglish, possibleAnswers, correctAnswer, questionType);
 };
-
-/**
- * Static factory method to restore an ArithmeticCard from JSON data.
+/** Static factory method to restore an QuestionCard from JSON data.
  * This will typically be used when loading cards from AsyncStorage or other storage systems.
- * @param {object} data - The JSON object representing the stored ArithmeticCard.
- * @returns {ArithmeticCard} - A fully restored ArithmeticCard instance.
+ * @param {object} data - The JSON object representing the stored QuestionCard.
+ * @returns {QuestionCard} - A fully restored QuestionCard instance.
  */
-export const restoreArithmeticCardFromJSON = (data) => {
-return ArithmeticCard.fromJSON(data);
+export const restoreQuestionCardFromJSON = (data) => {
+return  QuestionCard.fromJSON(data);
 };
 
 // Helper functions to generate specific types of questions
@@ -168,6 +171,11 @@ const createLogarithmQuestion = (significantFigures, decimal) => {
     return [question, correctAnswer, possibleAnswers];
 };
 
+// const createLogicQuestion = () => {
+//     //check against the propositional logic rules
+
+// };
+
 
 // Utility functions to generate random numbers and possible answers
 
@@ -191,6 +199,41 @@ while (possibleAnswers.length < 4) {
 return possibleAnswers.sort(() => Math.random() - 0.5);
 };
 
+/**
+ * Parse the question to English
+ * 
+ * this will take in the question and return the question in English form
+ * to do this we will need to parse the question into an expression tree
+ * and then we will need to traverse the tree and convert it to an english expression
+ * we will need to handle the operators, and the operands
+ * we will need to handle the numbers and the variables
+ * we will need to handle the exponents
+ * we will need to handle the roots
+ * we will need to handle the logarithms
+ * we will need to handle the logic operators
+ * it will be built in a way that we can add more operators and operands in the future
+ * as well as handle multiple variables, numbers, operators, and parentheses
+ * 
+ * @param {string} question - The question to parse to English
+ * @returns {string} - The question in English
+ */
+const parseQuestionToEnglish = (question, significantFigures, decimal) => {
+/** first we will break question into its individual tokens
+*  we have to check for numbers, and can use significant figures to know how many digits to expect
+*  we will need to handle the operators, and the operands
+*  we will need to handle the exponents
+*  we will need to handle the roots
+*  we will need to handle the logarithms
+*  we will need to handle the logic operators
+*  it will be built in a way that we can add more operators and operands in the future
+*  as well as handle multiple variables, numbers, operators, and parentheses
+
+//split the question into tokens
+const tokens = question.split('');
+    
+
+*/
+};
 
 /** for logic questions
 const andSymbol = '∧';
@@ -198,3 +241,5 @@ const orSymbol = '∨';
 const notSymbol = '¬';
 const impliesSymbol = '→';
  */
+
+
