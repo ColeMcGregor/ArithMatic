@@ -75,9 +75,9 @@ switch (questionType) {
     case 'logarithm':
     [question, correctAnswer, possibleAnswers] = createLogarithmQuestion(significantFigures, decimal);
     break;
-    case 'logic':
-    [question, correctAnswer, possibleAnswers] = createLogicQuestion();
-    break;
+    // case 'logic':
+    // [question, correctAnswer, possibleAnswers] = createLogicQuestion();
+    // break;
     default:
     break;
 }
@@ -99,48 +99,48 @@ return  QuestionCard.fromJSON(data);
 // Helper functions to generate specific types of questions
 
 const createAdditionQuestion = (significantFigures, decimal) => {
-const num1 = generateRandomNumber(significantFigures, decimal);
-const num2 = generateRandomNumber(significantFigures, decimal);
-const question = `${num1} + ${num2}`;
-const correctAnswer = num1 + num2;
-const possibleAnswers = generatePossibleAnswers(correctAnswer);
-return [question, correctAnswer, possibleAnswers];
+    const num1 = generateRandomNumber(significantFigures, decimal);
+    const num2 = generateRandomNumber(significantFigures, decimal);
+    const question = `${num1} + ${num2}`;
+    const correctAnswer = num1 + num2;
+    const possibleAnswers = generatePossibleAnswers(correctAnswer);
+    return [question, correctAnswer, possibleAnswers];
 };
 
 const createSubtractionQuestion = (significantFigures, decimal) => {
-const num1 = generateRandomNumber(significantFigures, decimal);
-const num2 = generateRandomNumber(significantFigures, decimal);
-const question = `${num1} - ${num2}`;
-const correctAnswer = num1 - num2;
-const possibleAnswers = generatePossibleAnswers(correctAnswer);
-return [question, correctAnswer, possibleAnswers];
+    const num1 = generateRandomNumber(significantFigures, decimal);
+    const num2 = generateRandomNumber(significantFigures, decimal);
+    const question = `${num1} - ${num2}`;
+    const correctAnswer = num1 - num2;
+    const possibleAnswers = generatePossibleAnswers(correctAnswer);
+    return [question, correctAnswer, possibleAnswers];
 };
 
 const createMultiplicationQuestion = (significantFigures, decimal) => {
-const num1 = generateRandomNumber(significantFigures, decimal);
-const num2 = generateRandomNumber(significantFigures, decimal);
-const question = `${num1} * ${num2}`;
-const correctAnswer = num1 * num2;
-const possibleAnswers = generatePossibleAnswers(correctAnswer);
-return [question, correctAnswer, possibleAnswers];
+    const num1 = generateRandomNumber(significantFigures, decimal);
+    const num2 = generateRandomNumber(significantFigures, decimal);
+    const question = `${num1} * ${num2}`;
+    const correctAnswer = num1 * num2;
+    const possibleAnswers = generatePossibleAnswers(correctAnswer);
+    return [question, correctAnswer, possibleAnswers];
 };
 
 const createDivisionQuestion = (significantFigures, decimal) => {
 const num1 = generateRandomNumber(significantFigures, decimal);
-const num2 = generateRandomNumber(significantFigures, decimal);
-const question = `${num1} / ${num2}`;
-const correctAnswer = num1 / num2;
-const possibleAnswers = generatePossibleAnswers(correctAnswer);
-return [question, correctAnswer, possibleAnswers];
+    const num2 = generateRandomNumber(significantFigures, decimal);
+    const question = `${num1} / ${num2}`;
+    const correctAnswer = num1 / num2;
+    const possibleAnswers = generatePossibleAnswers(correctAnswer);
+    return [question, correctAnswer, possibleAnswers];
 };
 
 const createModulusQuestion = (significantFigures, decimal) => {
-const num1 = generateRandomNumber(significantFigures, decimal);
-const num2 = generateRandomNumber(significantFigures, decimal);
-const question = `${num1} mod(%) ${num2}`;
-const correctAnswer = num1 % num2;
-const possibleAnswers = generatePossibleAnswers(correctAnswer);
-return [question, correctAnswer, possibleAnswers];
+    const num1 = generateRandomNumber(significantFigures, decimal);
+    const num2 = generateRandomNumber(significantFigures, decimal);
+    const question = `${num1} mod(%) ${num2}`;
+    const correctAnswer = num1 % num2;
+    const possibleAnswers = generatePossibleAnswers(correctAnswer);
+    return [question, correctAnswer, possibleAnswers];
 };
 
 //extra hard ones
@@ -180,23 +180,29 @@ const createLogarithmQuestion = (significantFigures, decimal) => {
 // Utility functions to generate random numbers and possible answers
 
 const generateRandomNumber = (significantFigures, decimal) => {
-const factor = Math.pow(10, significantFigures);
-let number = Math.round(Math.random() * factor);
-if (decimal) {
-    return (number / factor).toFixed(significantFigures);
-}
-return number;
+    //generate the factor, using math.pow and the significatn figures, giving me a val that starts with 1 and has zeros following
+    const factor = Math.pow(10, significantFigures);
+    //make the number by multiplying the factor by a random number between 0 and 1, then rounding it to the nearest whole number
+    let number = Math.round(Math.random() * factor);
+    //if decimal is true, then lets get a decimal from it
+    if (decimal) {
+        return (number / factor).toFixed(significantFigures);
+    }
+    return number;
 };
 
 const generatePossibleAnswers = (correctAnswer) => {
-const possibleAnswers = [correctAnswer];
-while (possibleAnswers.length < 4) {
-    const wrongAnswer = correctAnswer + Math.floor(Math.random() * 10) - 5;
-    if (!possibleAnswers.includes(wrongAnswer)) {
-    possibleAnswers.push(wrongAnswer);
+    const possibleAnswers = [correctAnswer];
+    while (possibleAnswers.length < 4) {
+        //generate a wrong answer
+        const wrongAnswer = generateRandomNumber(significantFigures, decimal);
+        //make sure the wrong answer is not already in the possible answers, correct or incorrect
+        if (!possibleAnswers.includes(wrongAnswer)) {
+            //push the wrong answer into the possible answers
+            possibleAnswers.push(wrongAnswer);
+        }
     }
-}
-return possibleAnswers.sort(() => Math.random() - 0.5);
+    return possibleAnswers;
 };
 
 /**
