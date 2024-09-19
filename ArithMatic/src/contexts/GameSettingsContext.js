@@ -1,7 +1,8 @@
 import React, { createContext, useState, useMemo } from 'react';
 
 // Define possible question types (for the Options screen)
-const possibleTypes = ['addition', 'subtraction', 'multiplication', 'division', 'exponents', 'roots', 'logarithms', 'modulus'];
+const possibleTypes = ['Addition', 'Subtraction', 'Multiplication', 'Division', 'Exponents', 'Roots', 'Logarithms', 'Modulus'];
+const possibleDifficulties = ['Custom', 'Easy', 'Medium', 'Hard', 'Genius'];
 
 export const GameSettingsContext = createContext();
 
@@ -13,6 +14,7 @@ export const GameSettingsProvider = ({ children }) => {
         decimal: false, // Whether to include decimals
         mode: 'count', // 'count' or 'time'
         selectTypes: ['addition'], // Initially selected types
+        difficulty: 'easy', // Difficulty of the game
     });
 
     // Memoize the value to avoid unnecessary re-renders
@@ -20,6 +22,7 @@ export const GameSettingsProvider = ({ children }) => {
         gameSettings,
         setGameSettings,
         possibleTypes, // Available question types
+        possibleDifficulties, // Available difficulties
     }), [gameSettings]);
 
     return (
