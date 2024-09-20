@@ -7,6 +7,7 @@ export const PlayerStatsContext = createContext();
 
 export const PlayerStatsProvider = ({ children }) => {
     const [playerStats, setPlayerStats] = useState({
+        timeTaken: 0, // Total time taken
         correct: 0, // Total correct answers
         incorrect: 0, // Total incorrect answers
         breakdown: possibleTypes.reduce((acc, type) => {acc[type] = { correct: 0, incorrect: 0 }; //acc means 
@@ -35,8 +36,9 @@ export const PlayerStatsProvider = ({ children }) => {
      * Update the player stats for a given question type
      * @param {string} type - The question type (e.g., 'addition', 'multiplication')
      * @param {boolean} correct - Whether the answer was correct or not
+     * @param {number} time - The time taken to answer the question
      */
-    const updateStats = (type, correct) => {
+    const updateStats = (type, correct, time) => {
         setPlayerStats((prevStats) => {
             //new stats is a copy of the previous stats
             const newStats = { ...prevStats };
