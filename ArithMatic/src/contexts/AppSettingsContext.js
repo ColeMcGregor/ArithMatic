@@ -12,9 +12,9 @@ export const AppSettingsContext = createContext();
 
 export const AppSettingsProvider = ({ children }) => {
     const [appSettings, setAppSettings] = useState({
-        FXSound: true, // Sound effects on or off
+        FXOn: true, // Sound effects on or off
         FXVolume: 100, // Sound effects volume
-        MusicSound: true, // Music on or off
+        MusicOn: true, // Music on or off
         MusicVolume: 100, // Music volume
         Haptics: true, // Vibration on or off
     });

@@ -1,5 +1,5 @@
 import { GameSettingsProvider } from './GameSettingsContext';
-import { PlayerProvider } from './PlayerSettingsContext';
+import { PlayerStatsProvider } from './PlayerSettingsContext';
 import { AppSettingsProvider } from './AppSettingsContext';
 
 /**
@@ -12,13 +12,14 @@ import { AppSettingsProvider } from './AppSettingsContext';
 
 export const ContextProvider = ({ children }) => {
     return (
-        <GameSettingsProvider>
-            <AppSettingsProvider>
-            <PlayerStatsProvider>
-                {children}
-            </PlayerStatsProvider>
-            </AppSettingsProvider>
-        </GameSettingsProvider>
+        <AppSettingsProvider> {/* AppSettingsContext  (FXSound, MusicSound, Haptics) */}
+            <GameSettingsProvider>  {/* GameSettingsContext (time, questions, significantFigures, decimals, mode, selectTypes, difficulty) */}
+                <PlayerStatsProvider> {/* PlayerStatsContext (correct, incorrect, breakdown) */}
+                    {children}
+                </PlayerStatsProvider>
+            </GameSettingsProvider>
+        </AppSettingsProvider>
+
     );
 };
 
