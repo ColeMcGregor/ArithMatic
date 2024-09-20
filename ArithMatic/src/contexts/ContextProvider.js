@@ -1,5 +1,6 @@
 import { GameSettingsProvider } from './GameSettingsContext';
 import { PlayerProvider } from './PlayerSettingsContext';
+import { AppSettingsProvider } from './AppSettingsContext';
 
 /**
  * ContextProvider is a wrapper component that provides all the contexts to the app
@@ -12,9 +13,11 @@ import { PlayerProvider } from './PlayerSettingsContext';
 export const ContextProvider = ({ children }) => {
     return (
         <GameSettingsProvider>
-            <PlayerProvider>
+            <AppSettingsProvider>
+            <PlayerStatsProvider>
                 {children}
-            </PlayerProvider>
+            </PlayerStatsProvider>
+            </AppSettingsProvider>
         </GameSettingsProvider>
     );
 };
