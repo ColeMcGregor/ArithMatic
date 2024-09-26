@@ -3,34 +3,30 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Font from 'expo-font';
 //context
 import { GameContext } from '../contexts/GameContext';
-//fonts
-import PixieFont from '../assets/fonts/PixieFont.otf';
 //decorations
-import HomeBackground from '../components/decorations/HomeBackground';
+//import HomeBackground from '../components/decorations/HomeBackground';
 import Title from '../components/decorations/Title';
 //buttons
 import GoButton from '../components/buttons/GoButton';
 import OptionsButton from '../components/buttons/OptionsButton';
 import ScoresButton from '../components/buttons/ScoresButton';
 import InfoButton from '../components/buttons/InfoButton';
+import ChooseButton from '../components/buttons/ChooseButton';
 
 
 export default function HomeScreen() {
-//stuff
-const [fontsLoaded] = Font.useFonts({
-  PixieFont: PixieFont,
-}); 
-if (!fontsLoaded) {
-  console.log('fonts not loaded');  
-}
 
 //return
 return (
-  <View style={styles.container}>
-    <HomeBackground />
-    <Text style={styles.title}>Arith-Matic</Text>
-    <GoButton />
-    <InfoButton />
+  <View style={styles.container}>    
+  <Title />
+  {/* HERE GOES THE BACKGROUND */}
+  {/* HERE GOES THE DECORATIONS */}
+  <GoButton  style={styles.goButton}/>
+  <InfoButton style={styles.infoButton}/>
+  <ScoresButton style={styles.scoresButton}/>
+  <OptionsButton style={styles.optionsButton}/>
+  <ChooseButton style={styles.chooseButton}/>
   </View>
 );
 }
@@ -41,9 +37,30 @@ container: {
   alignItems: 'center',
   backgroundColor: '#009900',
 },
-title: {
-  flex: .3,
-  fontSize: 50,
-  fontWeight: 'bold',
+//down here we set the position of the buttons, so that we can adjust it later centrally
+goButton: {
+  position: 'absolute',
+  top: 100,
+  left: 100,
 },
-});
+infoButton: {
+  position: 'absolute',
+  top: 100,
+  right: 100,
+},
+scoresButton: {
+  position: 'absolute',
+  bottom: 100,
+  left: 100,
+},
+optionsButton: {
+  position: 'absolute',
+  bottom: 100,
+  right: 100,
+},
+chooseButton: {
+  position: 'absolute',
+  alignItems: 'center',
+  justifyContent: 'center',
+},
+}); 
