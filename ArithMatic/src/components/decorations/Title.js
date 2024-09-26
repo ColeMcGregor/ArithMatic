@@ -10,6 +10,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import PixieFont from '../../assets/fonts/PixieFont.otf';
+import * as Font from 'expo-font';
+
 
 
 export default function Title() {

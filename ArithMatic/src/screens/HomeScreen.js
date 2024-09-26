@@ -1,8 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import * as Font from 'expo-font';
-//context
-import { GameContext } from '../contexts/GameContext';
+import { View, StyleSheet } from 'react-native';
 //decorations
 //import HomeBackground from '../components/decorations/HomeBackground';
 import Title from '../components/decorations/Title';
@@ -12,6 +9,14 @@ import OptionsButton from '../components/buttons/OptionsButton';
 import ScoresButton from '../components/buttons/ScoresButton';
 import InfoButton from '../components/buttons/InfoButton';
 import ChooseButton from '../components/buttons/ChooseButton';
+
+/**
+ * HomeScreen
+ * 
+ * 
+ * 
+ * @returns HomeScreen
+ */
 
 
 export default function HomeScreen() {
